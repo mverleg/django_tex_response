@@ -8,6 +8,7 @@ Installation & Configuration:
 -----------
 
 - Install using ``pip install git+https://bitbucket.org/mverleg/django_tex_response.git``
+- Import using ``from tex_response import render_pdf``
 
 Alternatively you can download just the tex.py file and put it in your project; this contains everything.
 
@@ -20,6 +21,14 @@ How to use it
 - Your view would look something like this:
 
                 return render_pdf(request, 'textest.tex', {'date': datetime.now()}, filename = 'testfile.pdf')
+
+What else?
+-----------
+
+There isn't much to this, it's really simple. However, you can also import and use:
+
+- tex_to_pdf : instead of creating a response, return the path to a temporary pdf file
+- LatexException : catch this in case of problems
 
 It doesn't work
 -----------
