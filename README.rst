@@ -16,7 +16,7 @@ How to use it
 -----------
 
 - Put your .tex file somewhere that the Django template engine can find.
-- Escape anything in your TeX code that has special meaning for Django, such as {{ or {% constructs
+- Escape anything in your TeX code that has special meaning for Django, such as {{ or {% constructs. This can be done with {% templatetag openbrace %} etc, see https://docs.djangoproject.com/en/dev/ref/templates/builtins/#templatetag
 - Optionally add Django template commands, like variables (``{{ date }}``) or even loops.
 - Your view would look something like this:
 
@@ -45,11 +45,11 @@ How it does it's thing
 
 Django Tex Response is very simple. It:
 
-- ... renders the .tex file using Django, as if it were a normal template
-- ... writes the result to a temporary directory
-- ... uses Popen to run your tex installation (default 'lualatex') to compile it
-- ... turns the output pdf into a response
-- ... deletes temporary files
+1. renders the .tex file using Django, as if it were a normal template
+2. writes the result to a temporary directory
+3. uses Popen to run your tex installation (default 'lualatex') to compile it
+4. turns the output pdf into a response
+5. deletes temporary files
 
 License
 -----------
