@@ -34,7 +34,9 @@ There isn't much to this, it's really simple. However, you can also import and u
 It doesn't work
 -----------
 
+Common problems include having Django template symbols in your tex-template (e.g. ``{{``) or having such as a value of a variable used in the template. A notable example of the later is displaying something like a dictionary directly in your template. e.g. for debugging purposes, which introduces unexpected ``{``'s.
 
+You can use the above function ``render_tex(request, template, context)`` to render the template to a temporary .tex file. You can then manually compile and inspect this file to find the problem.
 
 If your tex file compiles fine outside Django, you can make sure that Django uses the same command by providing these arguments:
 
