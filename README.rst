@@ -20,7 +20,7 @@ How to use it
 - Optionally add Django template commands, like variables (``{{ date }}``) or even loops.
 - Your view would look something like this:
 
-                return render_pdf(request, 'textest.tex', {'date': datetime.now()}, filename = 'testfile.pdf')
+``return render_pdf(request, 'textest.tex', {'date': datetime.now()}, filename = 'testfile.pdf')``
 
 What else?
 -----------
