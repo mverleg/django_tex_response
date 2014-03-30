@@ -27,11 +27,14 @@ What else?
 
 There isn't much to this, it's really simple. However, you can also import and use:
 
-- tex_to_pdf : instead of creating a response, return the path to a temporary pdf file
+- render_tex : renders the template to a .tex file without compiling the pdf (returns the temporary file path)
+- tex_to_pdf : given a .tex file, compiles the .pdf result (deletes the .tex file) (returns the temporary file path)
 - LatexException : catch this in case of problems
 
 It doesn't work
 -----------
+
+
 
 If your tex file compiles fine outside Django, you can make sure that Django uses the same command by providing these arguments:
 
