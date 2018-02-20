@@ -57,12 +57,14 @@ def render_tex(request, template, context):
 
 
 def tex_to_pdf(tex_file, destination=mkstemp(suffix='.pdf')[1],
-		tex_cmd='lualatex', flags=('-interaction=nonstopmode', '-halt-on-error',)):
+		tex_cmd='lualatex', flags=('-interaction=nonstopmode', '-halt-on-error',),
+		do_link_imgs=True):
 	"""
 	Render .tex file to .pdf.
 	"""
 	tmp_dir = dirname(tex_file)
-	link_imgs(tmp_dir, derive_static_dirs())
+	if do_link_imgs:
+		link_imgs(tmp_dir, derive_static_dirs())
 	out_file = join(tmp_dir, 'output.pdf')
 	cmd = 'cd {dir:s}; {cmd:s} {flags:s} -jobname=output input.tex'.format(
 		dir=tmp_dir, cmd=tex_cmd, flags=' '.join(flags))
@@ -86,13 +88,13 @@ def tex_to_pdf(tex_file, destination=mkstemp(suffix='.pdf')[1],
 
 
 def render_pdf(request, template, context, filename='file.pdf',
-		tex_cmd='lualatex', flags=('-interaction=nonstopmode', '-halt-on-error',)):
+		tex_cmd='lualatex', flags=('-interaction=nonstopmode', '-halt-on-error',),
+		do_link_imgs=True):
 	"""
 	Render template to pdf-response (by using the above functions).
 	"""
-	# context['graphics_path'] = make_graphics_path()
 	tex_file = render_tex(request, template, context)
-	pdf_file = tex_to_pdf(tex_file, tex_cmd=tex_cmd, flags=flags)
+	pdf_file = tex_to_pdf(tex_file, tex_cmd=tex_cmd, flags=flags, do_link_imgs=do_link_imgs)
 	response = HttpResponse(content_type='application/pdf')
 	response['Content-Disposition'] = 'attachment; filename="%s"' % filename
 	with open(pdf_file, 'rb') as fh:

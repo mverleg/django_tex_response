@@ -45,7 +45,7 @@ If your tex file compiles fine outside Django, you can make sure that Django use
 
 Django Tex Response has been tested on Ubuntu with texlive-full. Fixes for other platforms are most welcome.
 
-If an image couldn't be find, make sure the image is inside a static source dir (STATIC_DIRS or app/static) and use a path relative to that dir.
+If an image couldn't be found, make sure the image is inside a static source dir (STATIC_DIRS or app/static) and use a path relative to that dir.
 
 How it does it's thing
 -------------------------------
@@ -54,7 +54,7 @@ Django Tex Response is very simple. It:
 
 1. renders the .tex file using Django, as if it were a normal template
 2. writes the result to a temporary directory
-3. symlinks or copies all the static files to the directory (for images)
+3. symlinks or copies all the static files to the directory (for images) if ``do_link_imgs`` is true (default)
 4. uses Popen to run your tex installation (default 'lualatex') to compile it
 5. turns the output pdf into a response
 6. deletes temporary files
