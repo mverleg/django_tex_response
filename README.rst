@@ -7,7 +7,7 @@ Very simple code that lets you use your installed TeX compiler to render a .tex 
 Installation & Configuration:
 -------------------------------
 
-- Install using ``pip install git+https://bitbucket.org/mverleg/django_tex_response.git``
+- Install using ``pip install tex_response``
 - Import using ``from tex_response import render_pdf``
 
 Alternatively you can download just the tex.py file and put it in your project; this contains everything.

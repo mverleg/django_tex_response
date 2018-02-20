@@ -16,7 +16,7 @@ setup(
     include_package_data=True,
     url='https://bitbucket.org/mverleg/django_tex_response',
     license='revised BSD license; see LICENSE.txt',
-    description='Very simple code that lets you use your installed TeX compiler to render a .tex template to a pdf-file response.',
+    description='Simple Django code that lets you use your installed TeX compiler to render a .tex template to a pdf-file response.',
     zip_safe=True,
     install_requires = [],
 )
