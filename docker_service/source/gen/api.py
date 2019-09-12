@@ -14,16 +14,23 @@ class Counter:
         return cls.value
 
 
-@require_POST
 def generate_latex_file(request):
+    if request.method == 'GET':
+        return HttpResponse("Send a post request containing 'key' and 'latex'\nExample request:\ncurl -X POST "
+            "localhost:8000 -F \"key=A54eAg@lpPZ94vBzI%7Qd0RC_P0wQR6$\" "
+            "-F \"latex=@/home/mark/latex_example.tex\"\n", status=405)
+    if request.method != 'POST':
+        return HttpResponse("Send a post request containing 'key' and 'latex'\n", status=405)
+    if not request.FILES:
+        return HttpResponse("use 'enctype=\"multipart/form-data\"'\n", status=405)
     if 'key' not in request.POST:
         return HttpResponseForbidden("request should contain 'key' as post data\n")
-    key = request.POST['key']
+    key = request.POST.get('key', None)
     if settings.ACCESS_KEY != key:
         return HttpResponseForbidden("the provided post 'key' was incorrect\n")
-    if 'latex' not in request.POST:
+    if not request.FILES or 'latex' not in request.FILES:
         return HttpResponseBadRequest("request should contain 'latex' as post data\n")
-    latex = request.POST['latex']
+    latex = request.FILES.get('latex', None)
     pdf = b''
     name = '{}_{}.pdf'.format(time.time(), Counter.next())
     response = HttpResponse(pdf, content_type='application/pdf')
