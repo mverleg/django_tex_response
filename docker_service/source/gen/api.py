@@ -2,7 +2,8 @@ import time
 
 from django.conf import settings
 from django.http import HttpResponseForbidden, HttpResponseBadRequest, HttpResponse
-from django.views.decorators.http import require_POST
+
+from docker_service.source.gen.latex import store_or_render
 
 
 class Counter:
@@ -31,7 +32,7 @@ def generate_latex_file(request):
     if not request.FILES or 'latex' not in request.FILES:
         return HttpResponseBadRequest("request should contain 'latex' as post data\n")
     latex = request.FILES.get('latex', None)
-    pdf = b''
+    pdf = store_or_render(latex)
     name = '{}_{}.pdf'.format(time.time(), Counter.next())
     response = HttpResponse(pdf, content_type='application/pdf')
     response['Content-Disposition'] = 'attachment; filename="\'{}\'"'.format(name)
