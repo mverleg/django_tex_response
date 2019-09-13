@@ -16,6 +16,11 @@ RUN set -o pipefail && \
     rm -rf /var/lib/apt/lists/*
 
 RUN set -o pipefail && \
+    apk update && \
+    apk add texlive-luatex && \
+    rm -rf /var/lib/apt/lists/*
+
+RUN set -o pipefail && \
     apk add --no-cache python3 && \
     pip3 install -U pip && \
     rm -rf /var/lib/apt/lists/*
@@ -24,6 +29,7 @@ RUN set -o pipefail && \
 COPY requirements.pip .
 
 RUN pip3 install -r requirements.pip
+
 
 COPY source .
 

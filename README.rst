@@ -40,7 +40,7 @@ You can use the above function ``render_tex(request, template, context)`` to ren
 
 If your tex file compiles fine outside Django, you can make sure that Django uses the same command by providing these arguments:
 
-- tex_cmd (default 'lualatex')
+- tex_cmd (default 'luatex')
 - flags (default ['-interaction=nonstopmode', '-halt-on-error'])
 
 Django Tex Response has been tested on Ubuntu with texlive-full. Fixes for other platforms are most welcome.
@@ -55,7 +55,7 @@ Django Tex Response is very simple. It:
 1. renders the .tex file using Django, as if it were a normal template
 2. writes the result to a temporary directory
 3. symlinks or copies all the static files to the directory (for images) if ``do_link_imgs`` is true (default)
-4. uses Popen to run your tex installation (default 'lualatex') to compile it
+4. uses Popen to run your tex installation (default 'luatex') to compile it
 5. turns the output pdf into a response
 6. deletes temporary files
 

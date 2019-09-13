@@ -61,7 +61,7 @@ def render_tex(request, template, context):
 
 
 def tex_to_pdf(tex_file, destination=mkstemp(suffix='.pdf')[1],
-		tex_cmd='lualatex', flags=('-interaction=nonstopmode', '-halt-on-error',),
+		tex_cmd='luatex', flags=('-interaction=nonstopmode', '-halt-on-error',),
 		do_link_imgs=True):
 	"""
 	Render .tex file to .pdf.
@@ -92,7 +92,7 @@ def tex_to_pdf(tex_file, destination=mkstemp(suffix='.pdf')[1],
 
 
 def render_pdf(request, template, context, filename='file.pdf',
-		tex_cmd='lualatex', flags=('-interaction=nonstopmode', '-halt-on-error',),
+		tex_cmd='luatex', flags=('-interaction=nonstopmode', '-halt-on-error',),
 		do_link_imgs=True):
 	"""
 	Render template to pdf-response (by using the above functions).
