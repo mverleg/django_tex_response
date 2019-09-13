@@ -1,2 +1,2 @@
 django==2.2.*
-tex_response==1.2.*
+tex_response>=1.2.1

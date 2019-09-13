@@ -5,14 +5,13 @@ For installing with pip
 """
 
 from distutils.core import setup
-from setuptools import find_packages
 
 setup(
     name='tex_response',
-    version='1.2.1',
+    version='1.2.2',
     author=u'Mark V',
     author_email='markv.nl.dev@gmail.com',
-    packages=find_packages(),
+    packages=['tex_response'],
     include_package_data=True,
     url='https://bitbucket.org/mverleg/django_tex_response',
     license='revised BSD license; see LICENSE.txt',
