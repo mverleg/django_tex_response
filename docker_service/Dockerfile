@@ -1,4 +1,10 @@
 
+# Container with a process to compile latex documents
+# Usage note:
+# - docker build -t docgen .
+# - docker run --rm -p 8132:8132 --name c-docgen docgen
+# - curl -X POST localhost:8132 -F "key=A54eAg@lpPZ94vBzI%7Qd0RC_P0wQR6$" -F "latex=@latex_example.tex"
+
 FROM alpine:3.10.2
 # FROM ubuntu:19.10
 
@@ -21,5 +27,5 @@ RUN pip3 install -r requirements.pip
 
 COPY source .
 
-CMD python3 manage.py runserver --nothreading --noreload "localhost:8132"
+CMD python3 manage.py runserver --nothreading --noreload "0.0.0.0:8132"
 

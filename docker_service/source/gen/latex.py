@@ -1,8 +1,8 @@
 from os import remove
 from os.path import join
-from tempfile import NamedTemporaryFile, mkdtemp
+from tempfile import mkdtemp
 
-from tex_response.tex import render_tex, tex_to_pdf
+from tex_response.tex import tex_to_pdf
 
 
 def render_pdf_binary(latex_bin, context):

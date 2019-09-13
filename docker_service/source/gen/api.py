@@ -3,8 +3,8 @@ import time
 from django.conf import settings
 from django.http import HttpResponseBadRequest, HttpResponse
 
-from docker_service.source.gen.form import LatexToPdfRequest
-from docker_service.source.gen.latex import render_pdf_binary
+from gen.form import LatexToPdfRequest
+from gen.latex import render_pdf_binary
 from tex_response import LatexException
 
 

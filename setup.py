@@ -9,7 +9,7 @@ from setuptools import find_packages
 
 setup(
     name='tex_response',
-    version='1.1.0',
+    version='1.2.0',
     author=u'Mark V',
     author_email='markv.nl.dev@gmail.com',
     packages=find_packages(),
