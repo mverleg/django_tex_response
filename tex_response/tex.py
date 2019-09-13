@@ -18,9 +18,9 @@ from django.template.loader import render_to_string
 
 class LatexException(Exception):
 	""" something went wrong while rendering a tex file """
-	def __init__(self, msg, *args, **kwargs):
+	def __init__(self, msg):
 		self.message = msg
-		super.__init__(msg, *args, **kwargs)
+		# super().__init__(self, *args, **kwargs)
 
 
 def derive_static_dirs():
