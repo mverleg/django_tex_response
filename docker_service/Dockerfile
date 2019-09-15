@@ -12,24 +12,31 @@ WORKDIR /app
 
 RUN set -o pipefail && \
     apk update && \
-    apk add texlive-full && \
-    rm -rf /var/lib/apt/lists/*
-
-RUN set -o pipefail && \
-    apk update && \
-    apk add texlive-luatex && \
-    rm -rf /var/lib/apt/lists/*
-
-RUN set -o pipefail && \
-    apk add --no-cache python3 && \
-    pip3 install -U pip && \
+    apk add texlive-full texlive-luatex curl && \
     rm -rf /var/lib/apt/lists/*
 # not sure clearing apt-get cache makes sense in alpine... but can't hurt
+
+#TODO @mark: merge with above
+RUN set -o pipefail && \
+    apk update && \
+    apk add python3 && \
+    rm -rf /var/lib/apt/lists/*
+# not sure clearing apt-get cache makes sense in alpine... but can't hurt
+
+RUN curl https://bootstrap.pypa.io/get-pip.py | python3
+
+RUN pip3 install --upgrade pip
+
+#TODO @mark: TMP
+#RUN apk add curl
+#RUN curl https://pypi.org/pypi/tex-response/json | python3 -m json.tool
+#RUN pip search -i https://pypi.org/pypi tex-response
+
+RUN pip3 install 'tex-response>=1.2.1'
 
 COPY requirements.pip .
 
 RUN pip3 install -r requirements.pip
-
 
 COPY source .
 
