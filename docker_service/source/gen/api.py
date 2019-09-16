@@ -5,7 +5,7 @@ from django.http import HttpResponseBadRequest, HttpResponse
 
 from gen.form import LatexToPdfRequest
 from tex_response import LatexException
-from tex_response.tex import tex_str_to_pdf_bytes
+from tex_response.tex import tex_bytes_to_pdf_bytes
 
 
 class Counter:
@@ -37,7 +37,7 @@ def generate_latex_file(request):
     latex_file = form.cleaned_data['latex']
     latex = latex_file.file.read()
     try:
-        pdf = tex_str_to_pdf_bytes(latex, tex_cmd='xelatex')
+        pdf = tex_bytes_to_pdf_bytes(latex, tex_cmd='xelatex')
     except LatexException as ex:
         return HttpResponse(ex.message, status=400)
     name = '{}_{}.pdf'.format(time.time(), Counter.next())

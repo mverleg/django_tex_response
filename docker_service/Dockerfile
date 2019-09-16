@@ -19,17 +19,13 @@ RUN set -o pipefail && \
 
 RUN curl https://bootstrap.pypa.io/get-pip.py | python3
 
-#RUN pip3 install --upgrade pip
-#RUN pip3 install -h
-
-#TODO @mark: TMP
-#RUN apk add curl
-#RUN curl https://pypi.org/pypi/tex-response/json | python3 -m json.tool
-#RUN pip search -i https://pypi.org/pypi tex-response
-
 COPY requirements.pip .
 
-RUN pip3 install -r requirements.pip
+#TODO @mark: TEMPORARY! REMOVE THIS!
+RUN pip3 install django
+COPY ./tex_response/ tex_response
+
+#RUN pip3 install -r requirements.pip
 
 COPY source .
 
