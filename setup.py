@@ -9,7 +9,7 @@ import setuptools  # keep!
 
 setup(
     name='tex-response',
-    version='1.2.1',
+    version='1.2.2',
     author=u'Mark V',
     author_email='markv.nl.dev@gmail.com',
     packages=['tex_response'],

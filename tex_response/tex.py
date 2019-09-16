@@ -91,16 +91,22 @@ def tex_to_pdf(tex_file, destination=mkstemp(suffix='.pdf')[1],
 	return destination
 
 
-def tex_str_to_pdf_bytes(tex_str, tex_cmd='luatex', flags=('-interaction=nonstopmode', '-halt-on-error')):
+def tex_bytes_to_pdf_bytes(tex_bytes, tex_cmd='luatex', flags=('-interaction=nonstopmode', '-halt-on-error')):
+	"""
+	Render .tex bytes to .pdf bytes (using temporary files, but that bookkeeping is hidden).
+	"""
 	latex_dir = mkdtemp('latex_gen')
 	latex_file = join(latex_dir, 'input.tex')
-	with open(latex_file, 'w+') as fh:
-		fh.write(tex_str)
+	with open(latex_file, 'wb+') as fh:
+		fh.write(tex_bytes)
 	pdf_tmp = tex_to_pdf(latex_file, tex_cmd=tex_cmd, flags=flags)
 	with open(pdf_tmp, 'rb') as fh:
 		data = fh.read()
-	rmtree(latex_dir)
 	return data
+
+
+def tex_str_to_pdf_bytes(tex_str, tex_cmd='luatex', flags=('-interaction=nonstopmode', '-halt-on-error')):
+	return tex_bytes_to_pdf_bytes(tex_str.encode('utf-8'), tex_cmd=tex_cmd, flags=flags)
 
 
 def render_pdf(request, template, context, filename='file.pdf',
