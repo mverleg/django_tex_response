@@ -21,11 +21,10 @@ RUN curl https://bootstrap.pypa.io/get-pip.py | python3
 
 COPY requirements.pip .
 
-#TODO @mark: TEMPORARY! REMOVE THIS!
-RUN pip3 install django
-COPY ./tex_response/ tex_response
+#RUN pip3 install django
+#COPY ./tex_response/ tex_response
 
-#RUN pip3 install -r requirements.pip
+RUN pip3 install -r requirements.pip
 
 COPY source .
 
