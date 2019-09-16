@@ -5,10 +5,10 @@ For installing with pip
 """
 
 from distutils.core import setup
-from setuptools import find_packages
+import setuptools
 
 setup(
-    name='tex_response',
+    name='tex-response',
     version='1.2.1',
     author=u'Mark V',
     author_email='markv.nl.dev@gmail.com',
@@ -29,6 +29,7 @@ setup(
         'Topic :: Software Development :: Libraries :: Python Modules',
         # 'Topic :: Utilities',
     ],
-
-    install_requires=[],
+    install_requires=[
+        'django',
+    ],
 )
