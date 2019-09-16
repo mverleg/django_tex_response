@@ -5,7 +5,7 @@ For installing with pip
 """
 
 from distutils.core import setup
-import setuptools
+import setuptools  # keep!
 
 setup(
     name='tex-response',

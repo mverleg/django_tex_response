@@ -76,7 +76,7 @@ def tex_to_pdf(tex_file, destination=mkstemp(suffix='.pdf')[1],
 	outp, err = proc.communicate()
 	if b'error occurred' in outp:
 		msgs = findall(r'[eE]rror:([^\n]*)\n', outp.decode('ascii'))
-		raise LatexException('{0:}\n\nFull log: {1:}'.format(
+		raise LatexException('Latex error: {0:}\nLong log: {1:}'.format(
 			'\n'.join(msg.strip() for msg in msgs),
 			outp[-800:]
 		))
@@ -89,6 +89,18 @@ def tex_to_pdf(tex_file, destination=mkstemp(suffix='.pdf')[1],
 			' pdf file; output: {1:s}').format(tex_cmd, outp))
 	rmtree(tmp_dir)
 	return destination
+
+
+def tex_str_to_pdf_bytes(tex_str, tex_cmd='luatex', flags=('-interaction=nonstopmode', '-halt-on-error')):
+	latex_dir = mkdtemp('latex_gen')
+	latex_file = join(latex_dir, 'input.tex')
+	with open(latex_file, 'w+') as fh:
+		fh.write(tex_str)
+	pdf_tmp = tex_to_pdf(latex_file, tex_cmd=tex_cmd, flags=flags)
+	with open(pdf_tmp, 'rb') as fh:
+		data = fh.read()
+	rmtree(latex_dir)
+	return data
 
 
 def render_pdf(request, template, context, filename='file.pdf',

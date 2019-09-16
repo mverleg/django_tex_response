@@ -27,8 +27,6 @@ RUN curl https://bootstrap.pypa.io/get-pip.py | python3
 #RUN curl https://pypi.org/pypi/tex-response/json | python3 -m json.tool
 #RUN pip search -i https://pypi.org/pypi tex-response
 
-RUN pip3 install 'tex-response>=1.2.1'
-
 COPY requirements.pip .
 
 RUN pip3 install -r requirements.pip

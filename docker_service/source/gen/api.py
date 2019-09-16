@@ -4,8 +4,8 @@ from django.conf import settings
 from django.http import HttpResponseBadRequest, HttpResponse
 
 from gen.form import LatexToPdfRequest
-from gen.latex import render_pdf_binary
 from tex_response import LatexException
+from tex_response.tex import tex_str_to_pdf_bytes
 
 
 class Counter:
@@ -37,10 +37,9 @@ def generate_latex_file(request):
     latex_file = form.cleaned_data['latex']
     latex = latex_file.file.read()
     try:
-        #TODO @mark: this still does a djanog render, but I have no context - rather just render directly
-        pdf = render_pdf_binary(latex, {})
+        pdf = tex_str_to_pdf_bytes(latex, tex_cmd='xelatex')
     except LatexException as ex:
-        return HttpResponseBadRequest(ex.message)
+        return HttpResponse(ex.message, status=400)
     name = '{}_{}.pdf'.format(time.time(), Counter.next())
     response = HttpResponse(pdf, content_type='application/pdf')
     response['Content-Disposition'] = 'attachment; filename="\'{}\'"'.format(name)
